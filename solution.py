@@ -155,6 +155,7 @@ def get_route(hostname):
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
                     print(tracelist2)
+                    print(tracelist1)
                     return tracelist2
                 else:
                 # Fill in start
