@@ -165,7 +165,7 @@ def get_route(hostname):
                     tracelist1.append("Error.") 
                 # If there is an exception/error to your if statements, you should append that to your list here
                 # Fill in end
-                    break
+                break
             finally:
                 mySocket.close()
 
