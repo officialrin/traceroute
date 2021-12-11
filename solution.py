@@ -152,7 +152,6 @@ def get_route(hostname):
                     tracelist1.append(str(addr[0]))
                     tracelist1.append(ip_to_host(addr[0])
                     
-                    
                     # You should add your responses to your lists here
                     # Fill in end
                 elif type == 0:
