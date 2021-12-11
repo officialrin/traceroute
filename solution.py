@@ -61,9 +61,9 @@ def build_packet():
 
     if sys.platform == 'darwin':
        # Convert 16-bit integers from host to network  byte order
-       myChecksum = htons(myChecksum) & 0xffff
+        myChecksum = htons(myChecksum) & 0xffff
     else:
-       myChecksum = htons(myChecksum)
+        myChecksum = htons(myChecksum)
 
 
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
@@ -116,7 +116,7 @@ def get_route(hostname):
             else:
                 # Fill in start
                 header = recvPacket[20:28]
-				type, code, checksum, packID, seqNo = struct.unpack("bbHHh", header)
+		type, code, checksum, packID, seqNo = struct.unpack("bbHHh", header)
                 # Fetch the icmp type from the IP packet
                 # Fill in end
                 try:  # try to fetch the hostname
