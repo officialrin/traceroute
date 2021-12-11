@@ -47,7 +47,7 @@ def build_packet():
 
     # Make the header in a similar way to the ping exercise.
     # Append checksum to the header.
-  
+
     myChecksum = 0
     myID = os.getpid() & 0xFFFF
     # Make a dummy header with a 0 checksum
@@ -115,17 +115,17 @@ def get_route(hostname):
 
             else:
                 # Fill in start
-                header = recvPacket[20:28]                     
+                header = recvPacket[20:28]
 				type, code, checksum, packID, seqNo = struct.unpack("bbHHh", header)
                 # Fetch the icmp type from the IP packet
                 # Fill in end
                 try:  # try to fetch the hostname
                 # Fill in start
-                hostName = gethostbyaddr(str(addr[0])) 
+                hostName = gethostbyaddr(str(addr[0]))
                 # Fill in end
                 except herror:  # if the host does not provide a hostname
                 # Fill in start
-                hostName = ("Hostname not found.")  
+                hostName = ("Hostname not found.")
                 # Fill in end
 
                 if types == 11:
@@ -146,7 +146,7 @@ def get_route(hostname):
                     tracelist1.append(str(host_Name[0]))
                     tracelist1.append(str(int((timeReceived - t) * 1000)) + "ms")
                     tracelist1.append(str(addr[0]))
-                    tracelist2.append(tracelist1)  
+                    tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
                 elif types == 0:
@@ -162,10 +162,11 @@ def get_route(hostname):
                     return tracelist2
                 else:
                 # Fill in start
-                    tracelist1.append("Error.") 
+                    tracelist1.append("Error.")
                 # If there is an exception/error to your if statements, you should append that to your list here
                 # Fill in end
                 break
             finally:
                 mySocket.close()
+
 
