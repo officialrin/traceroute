@@ -139,7 +139,7 @@ def get_route(hostname):
                     tracelist1.append(str(int((timeReceived - t) * 1000)) + "ms")
                     tracelist1.append(str(addr[0]))
                     tracelist1.append(ip_to_host(addr[0])
-                    tracelist2.append(tracelist1)
+                    
                     # You should add your responses to your lists here
                     # Fill in end
                 elif type == 3:
@@ -151,7 +151,7 @@ def get_route(hostname):
                     tracelist1.append(str(int((timeReceived - t) * 1000)) + "ms")
                     tracelist1.append(str(addr[0]))
                     tracelist1.append(ip_to_host(addr[0])
-                    tracelist2.append(tracelist1)
+                    
                     
                     # You should add your responses to your lists here
                     # Fill in end
@@ -164,7 +164,7 @@ def get_route(hostname):
                     tracelist1.append(str(int((timeReceived - t) * 1000)) + "ms")
                     tracelist1.append(str(addr[0]))
                     tracelist1.append(ip_to_host(addr[0])                  
-                    tracelist2.append(tracelist1)
+                   
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
                     print(tracelist2)
