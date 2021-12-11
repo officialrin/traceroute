@@ -66,7 +66,7 @@ def build_packet():
         myChecksum = htons(myChecksum)
 
 
-    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
+    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     packet = header + data
     return packet
 
