@@ -122,6 +122,7 @@ def get_route(hostname):
                 try:  # try to fetch the hostname
                 # Fill in start
                     hostname = gethostbyname(str(addr[0]))
+                    print hostname
                 # Fill in end
                 except herror:  # if the host does not provide a hostname
                 # Fill in start
@@ -159,10 +160,12 @@ def get_route(hostname):
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
+                    print tracelist2
                     return tracelist2
                 else:
                 # Fill in start
                     tracelist1.append("Error.")
+                    print "Error."
                 # If there is an exception/error to your if statements, you should append that to your list here
                 # Fill in end
                 break
