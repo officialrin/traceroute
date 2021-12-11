@@ -36,6 +36,7 @@ def checksum(string):
     answer = ~csum
     answer = answer & 0xffff
     answer = answer >> 8 | (answer << 8 & 0xff00)
+    print(answer)
     return answer
 
 
@@ -69,6 +70,7 @@ def build_packet():
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     packet = header + data
     return packet
+    print(packet)
 
 
 def get_route(hostname):
@@ -122,7 +124,7 @@ def get_route(hostname):
                 try:  # try to fetch the hostname
                 # Fill in start
                     hostname = gethostbyname(str(addr[0]))
-                    print hostname
+                    print(hostname)
                 # Fill in end
                 except herror:  # if the host does not provide a hostname
                 # Fill in start
@@ -160,7 +162,7 @@ def get_route(hostname):
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
-                    print tracelist2
+                    print(tracelist2)
                     return tracelist2
                 else:
                 # Fill in start
