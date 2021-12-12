@@ -60,15 +60,14 @@ def build_packet():
 
     if sys.platform == 'darwin':
        # Convert 16-bit integers from host to network  byte order
-        myChecksum = htons(myChecksum) & 0xffff
+        myChecksum = socket.htons(myChecksum) & 0xffff
     else:
-        myChecksum = htons(myChecksum)
+        myChecksum = socket.htons(myChecksum)
 
 
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     packet = header + data
     return packet
-    print(packet)
 
 
 def get_route(hostname):
