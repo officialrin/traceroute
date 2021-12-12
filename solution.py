@@ -9,26 +9,27 @@ import binascii
 ICMP_ECHO_REQUEST = 8
 MAX_HOPS = 30
 TIMEOUT = 2.0
-TRIES = 1
+TRIES = 2
+myID = os.getpid() & 0xffff
 
 
 # The packet that we shall send to each router along the path is the ICMP echo
 # request packet, which is exactly what we had used in the ICMP ping exercise.
 # We shall use the same packet that we built in the Ping exercise
 
-def checksum(string):
+def checksum(str):
     csum = 0
-    countTo = (len(string) // 2) * 2
+    countTo = (len(str) // 2) * 2
     count = 0
 
     while count < countTo:
-        thisVal = (string[count + 1]) * 256 + (string[count])
+        thisVal = (str[count + 1]) * 256 + (str[count])
         csum += thisVal
         csum &= 0xffffffff
         count += 2
 
-    if countTo < len(string):
-        csum += (string[len(string) - 1])
+    if countTo < len(str):
+        csum += (str[len(str) - 1])
         csum &= 0xffffffff
 
     csum = (csum >> 16) + (csum & 0xffff)
@@ -47,11 +48,9 @@ def build_packet():
 
     # Make the header in a similar way to the ping exercise.
     # Append checksum to the header.
-
-    myChecksum = 0
-    myID = os.getpid() & 0xFFFF
     # Make a dummy header with a 0 checksum
     # struct -- Interpret strings as packed binary data
+    myChecksum = 0
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     data = struct.pack("d", time.time())
     # Calculate the checksum on the data and the dummy header.
@@ -134,7 +133,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append((str(ttl), str(round((timeReceived - t) * 1000))+"ms", addr[0]))
+                    tracelist1.append(ttl, ((timeReceived - timeSent) * 1000))+"ms", addr[0], hostname(addr[0])))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
@@ -142,7 +141,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append((str(ttl), str(round((timeReceived - t) * 1000))+"ms", addr[0]))
+                    tracelist1.append(ttl, ((timeReceived - timeSent) * 1000))+"ms", addr[0], hostname(addr[0])))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
@@ -150,7 +149,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append((str(ttl), str(round((timeReceived - t) * 1000))+"ms", addr[0],hostname(addr[0])))
+                    tracelist1.append(ttl, ((timeReceived - timeSent) * 1000))+"ms", addr[0], hostname(addr[0])))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
