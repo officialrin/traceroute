@@ -60,9 +60,9 @@ def build_packet():
 
     if sys.platform == 'darwin':
        # Convert 16-bit integers from host to network  byte order
-        myChecksum = socket.htons(myChecksum) & 0xffff
+        myChecksum = mySocket.htons(myChecksum) & 0xffff
     else:
-        myChecksum = socket.htons(myChecksum)
+        myChecksum = mySocket.htons(myChecksum)
 
 
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
@@ -109,7 +109,7 @@ def get_route(hostname):
                     tracelist2.append(tracelist1)
                     # You should add the list above to your all traces list
                     # Fill in end
-            except socket.timeout:
+            except mySocket.timeout:
                 continue
 
             else:
