@@ -16,7 +16,7 @@ TRIES = 2
 # request packet, which is exactly what we had used in the ICMP ping exercise.
 # We shall use the same packet that we built in the Ping exercise
 
-def checksum(str):
+def checksum(string):
     csum = 0
     countTo = (len(string) // 2) * 2
     count = 0
@@ -133,7 +133,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append(str(ttl))
+                    tracelist1.append(ttl)
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
@@ -141,7 +141,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append(str(ttl))
+                    tracelist1.append(ttl)
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
