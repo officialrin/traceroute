@@ -69,7 +69,8 @@ def build_packet():
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     packet = header + data
     return packet
-    print(packet)
+    
+    
 
 def get_route(hostname):
     timeLeft = TIMEOUT
@@ -79,7 +80,7 @@ def get_route(hostname):
     for ttl in range(1, MAX_HOPS):
         for tries in range(TRIES):
             destAddr = gethostbyname(str(hostname))
-
+            tracelist1 = []
             # Fill in start
             icmp = getprotobyname("icmp")
             mySocket = socket(AF_INET, SOCK_RAW, icmp) # Make a raw socket named mySocket
@@ -121,7 +122,7 @@ def get_route(hostname):
                 # Fill in end
                 try:  # try to fetch the hostname
                 # Fill in start
-                    hostname = gethostbyaddr(str(addr[0]))
+                    hostname = gethostbyaddr(str(addr[0]))[0]
                     print(hostname)
                 # Fill in end
                 except herror:  # if the host does not provide a hostname
@@ -149,7 +150,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append((str(ttl), str(round((timeReceived - t) * 1000))+"ms", addr[0],ip_to_host(addr[0])))
+                    tracelist1.append((str(ttl), str(round((timeReceived - t) * 1000))+"ms", addr[0],hostname(addr[0])))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
