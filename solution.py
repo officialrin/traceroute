@@ -42,7 +42,7 @@ def return_name_ip(hIP):
     try:
         host = socket.gethostbyaddr(str(hIP[0]))
         nameIP = 'Name'.format(hIP, host[0]) 
-        print hIP
+        print(hIP)
     except herror:
         nameIP = '("Hostname not found.")'.format(hIP) 
     return nameIP
