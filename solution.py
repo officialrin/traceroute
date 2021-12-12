@@ -109,7 +109,7 @@ def get_route(hostname):
                     tracelist2.append(tracelist1)
                     # You should add the list above to your all traces list
                     # Fill in end
-            except timeout:
+            except socket.timeout:
                 continue
 
             else:
@@ -165,3 +165,5 @@ def get_route(hostname):
                 break
             finally:
                 mySocket.close()
+                
+get_route("www.google.com")
