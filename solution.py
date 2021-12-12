@@ -18,17 +18,17 @@ TRIES = 2
 
 def checksum(str):
     csum = 0
-    countTo = (len(str) // 2) * 2
+    countTo = (len(string) // 2) * 2
     count = 0
 
     while count < countTo:
-        thisVal = (str[count + 1]) * 256 + (str[count])
+        thisVal = (string[count + 1]) * 256 + (string[count])
         csum += thisVal
         csum &= 0xffffffff
         count += 2
 
-    if countTo < len(str):
-        csum += (str[len(str) - 1])
+    if countTo < len(string):
+        csum += (string[len(string) - 1])
         csum &= 0xffffffff
 
     csum = (csum >> 16) + (csum & 0xffff)
@@ -133,7 +133,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append(str(ttl))
+                    tracelist1.append(string(ttl))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
@@ -141,7 +141,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append(str(ttl))
+                    tracelist1.append(string(ttl))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
