@@ -38,6 +38,15 @@ def checksum(string):
     answer = answer >> 8 | (answer << 8 & 0xff00)
     return answer
 
+def return_name_ip(hIP):
+    try:
+        host = socket.gethostbyaddr(str(hIP[0]))
+        nameIP = 'Name'.format(hIP, host[0]) 
+        print hIP
+    except herror:
+        nameIP = '("Hostname not found.")'.format(hIP) 
+    return nameIP
+                
 
 def build_packet():
     # Fill in start
@@ -119,15 +128,6 @@ def get_route(hostname):
                 header = recvPacket[20:28]
                 type, code, checksum, packID, seqNo = struct.unpack("bbHHh", header)
                 # Fetch the icmp type from the IP packet
-                # Fill in end
-                try:  # try to fetch the hostname
-                # Fill in start
-                    hostname = gethostbyaddr(str(addr[0]))
-                    print(hostname)
-                # Fill in end
-                except herror:  # if the host does not provide a hostname
-                # Fill in start
-                    hostname = ("Hostname not found.")
                 # Fill in end
 
                 if type == 11:
