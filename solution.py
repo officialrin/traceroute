@@ -10,7 +10,6 @@ ICMP_ECHO_REQUEST = 8
 MAX_HOPS = 30
 TIMEOUT = 2.0
 TRIES = 2
-myID = os.getpid() & 0xffff
 
 
 # The packet that we shall send to each router along the path is the ICMP echo
@@ -50,6 +49,7 @@ def build_packet():
     # Append checksum to the header.
     # Make a dummy header with a 0 checksum
     # struct -- Interpret strings as packed binary data
+    myID = os.getpid() & 0xFFFF 
     myChecksum = 0
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     data = struct.pack("d", time.time())
@@ -116,7 +116,7 @@ def get_route(hostname):
             else:
                 # Fill in start
                 header = recvPacket[20:28]
-                type, code, checksum, packID, seqNo = struct.unpack("bbHHh", header)
+                types, code, checksum, packID, seqNo = struct.unpack("bbHHh", header)
                 # Fetch the icmp type from the IP packet
                 # Fill in end
                 try:  # try to fetch the hostname
@@ -129,39 +129,40 @@ def get_route(hostname):
                     hostName = ("Hostname not found.")
                 # Fill in end
 
-                if type == 11:
+                if types == 11:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append((ttl, (timeReceived - timeSent), addr, hostName)
+                    tracelist1.append(str(ttl))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
-                elif type == 3:
+                elif types == 3:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append((ttl, (timeReceived - timeSent), addr, hostName)
+                    tracelist1.append(str(ttl))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
-                elif type == 0:
+                elif types == 0:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append((ttl, (timeReceived - timeSent), addr, hostName)
+                    tracelist1.append(str(ttl), str(int((timeReceived - timeSent)) * 1000) + "ms"), addr[0], hostName)
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
-                    print(tracelist2)
-                    print(tracelist1)
-                    return tracelist2
+                    if addr[0] == destAddr:
+                        return tracelist2
+                    
+                    
                 else:
                 # Fill in start
                     tracelist1.append("Error.")
-                    print("Error.")
                 # If there is an exception/error to your if statements, you should append that to your list here
                 # Fill in end
                 break
             finally:
                 mySocket.close()
+           
