@@ -16,19 +16,19 @@ TRIES = 2
 # request packet, which is exactly what we had used in the ICMP ping exercise.
 # We shall use the same packet that we built in the Ping exercise
 
-def checksum(string):
+def checksum(str):
     csum = 0
-    countTo = (len(string) // 2) * 2
+    countTo = (len(str) // 2) * 2
     count = 0
 
     while count < countTo:
-        thisVal = (string[count + 1]) * 256 + (string[count])
+        thisVal = (str[count + 1]) * 256 + (str[count])
         csum += thisVal
         csum &= 0xffffffff
         count += 2
 
-    if countTo < len(string):
-        csum += (string[len(string) - 1])
+    if countTo < len(str):
+        csum += (str[len(str) - 1])
         csum &= 0xffffffff
 
     csum = (csum >> 16) + (csum & 0xffff)
@@ -133,7 +133,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append(ttl)
+                    tracelist1.append(str(ttl))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
@@ -141,7 +141,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append(ttl)
+                    tracelist1.append(str(ttl))
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here
                     # Fill in end
@@ -149,7 +149,7 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist1.append([ttl, (timeReceived - timeSent), destAddr, hostName])
+                    tracelist1.append(str(ttl), str(int((timeReceived - timeSent)) * 1000) + "ms"), addr[0], hostName)
                     tracelist2.append(tracelist1)
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
@@ -165,4 +165,3 @@ def get_route(hostname):
                 break
             finally:
                 mySocket.close()
-           
